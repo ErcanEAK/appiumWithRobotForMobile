@@ -1,0 +1,45 @@
+# Python genel dosyaları
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.env
+*.venv
+env/
+venv/
+ENV/
+*.egg-info
+.eggs
+*.egg
+
+# Robot Framework çıktıları ve log dosyaları
+output.xml
+log.html
+report.html
+debug.log
+*.png
+*.jpg
+screenshots/
+results/
+*.robot_debugger/
+
+# Pipenv ve diğer sanal ortam dosyaları
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# IDE ve editör dosyaları
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+
+# Test raporları ve geçici dosyalar
+*.csv
+*.db
+*.log
+*.tmp
+*.bak
+*.swp
