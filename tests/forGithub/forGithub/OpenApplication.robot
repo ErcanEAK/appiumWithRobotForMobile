@@ -6,7 +6,7 @@ Library             Process
 #*** Test Variables ***
 ${user1Email}       ercanakkaya86@hotmail.com
 ${user1Password}    123456
-${ANDROID_APP}      ..\Beewa.apk
+${ANDROID_APP}      .\Beewa.apk
 
 #*** Login Page Variables ***
 ${allowButton}       id=com.android.permissioncontroller:id/permission_allow_button

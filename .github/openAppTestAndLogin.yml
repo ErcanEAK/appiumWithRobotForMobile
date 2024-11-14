@@ -54,7 +54,7 @@ jobs:
 
       # Install the APK on the Android Emulator
       - name: Install APK
-        run: adb install ./path/to/your_apk_file.apk
+        run: adb install ./app-debug.apk
 
       # Start Appium Server
       - name: Start Appium Server
