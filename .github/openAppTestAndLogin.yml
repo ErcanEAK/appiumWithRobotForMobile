@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-
+  workflow_dispatch:  # Bu satır manuel çalıştırmayı etkinleştirir
 jobs:
   build:
     runs-on: ubuntu-latest
