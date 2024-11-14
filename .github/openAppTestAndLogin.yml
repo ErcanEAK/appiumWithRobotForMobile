@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Bu satır manuel başlatmayı aktif eder
+  workflow_dispatch:  # Manuel başlatmayı aktif eder
 
 jobs:
   build:
@@ -54,7 +54,7 @@ jobs:
 
       # Install the APK on the Android Emulator
       - name: Install APK
-        run: adb install ./app-debug.apk
+        run: adb install ./app-debug.apk  # APK dosyasının doğru yolu
 
       # Start Appium Server
       - name: Start Appium Server
