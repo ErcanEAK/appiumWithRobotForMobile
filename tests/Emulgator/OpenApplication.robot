@@ -7,6 +7,7 @@ Library             Process
 ${user1Email}       ercanakkaya86@hotmail.com
 ${user1Password}    123456
 
+
 #*** Login Page Variables ***
 ${allowButton}       id=com.android.permissioncontroller:id/permission_allow_button
 ${profileButton}     //hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button[2]
