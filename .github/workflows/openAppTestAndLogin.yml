@@ -14,9 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the project
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3  # v2 yerine v3 kullanıyoruz
+        with:
+          name: my-artifact
+          path: ./my-artifact-path
 
       # Set up Python
       - name: Set up Python
