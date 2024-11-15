@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Upload artifact
-        uses: actions/upload-artifact@v3  # v2 yerine v3 kullanıyoruz
+        uses: actions/upload-artifact@v4  # v2 yerine v3 kullanıyoruz
         with:
           name: my-artifact
           path: ./my-artifact-path
