@@ -16,18 +16,18 @@ jobs:
     steps:
       # Proje Dosyalarını Çek
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Output Artifact Yükle
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: my-artifact
           path: ./Output/
 
       # Python Ayarları
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.8'
 
@@ -78,3 +78,9 @@ jobs:
         with:
           name: robot-framework-results
           path: ./Output/
+
+      - name: Upload log files
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-files
+          path: ./log/
