@@ -7,26 +7,31 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Manuel başlatmayı aktif eder
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Proje Dosyalarını Çek
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Output Artifact Yükle
       - name: Upload artifact
-        uses: actions/upload-artifact@v3  # v2 yerine v3 kullanıyoruz
+        uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: ./my-artifact-path
+          path: ./Output/
 
-      # Set up Python
+      # Python Ayarları
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
-      # Install dependencies (Robot Framework, Appium-Python-Client, etc.)
+      # Bağımlılıkları Yükle
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -34,47 +39,42 @@ jobs:
           pip install robotframework-appiumlibrary
           pip install Appium-Python-Client
 
-      # Set up Android SDK and Emulator
+      # Android SDK ve Emulator Ayarları
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          api-level: 30
-          target: android-30
-          arch: x86_64
-          profile: Pixel_4
-          emulator-options: "-no-window -no-audio"
+          cmdline-tools-version: latest
+          accept-android-sdk-licenses: true
 
-      # Start Android Emulator
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           target: google_apis
           arch: x86_64
-          profile: Pixel_4
           emulator-options: "-no-window -no-audio"
 
-      # Install the APK on the Android Emulator
+      # APK Yükle
       - name: Install APK
-        run: adb install ./app-debug.apk  # APK dosyasının doğru yolu
+        run: adb install ./Beewa.apk
 
-      # Start Appium Server
+      # Appium Server Başlat
       - name: Start Appium Server
         run: |
           npm install -g appium
           appium --log-level error &
         timeout-minutes: 3
 
-      # Run Robot Framework Tests
+      # Robot Framework Testlerini Çalıştır
       - name: Run Robot Framework Tests
         run: |
           sleep 30
-          robot -d output tests/
+          robot -d Output tests/
 
-      # Publish Test Results
+      # Test Sonuçlarını Yükle
       - name: Archive Test Results
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: robot-framework-results
-          path: output/
+          path: ./Output/
