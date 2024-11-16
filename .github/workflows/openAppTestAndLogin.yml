@@ -54,6 +54,7 @@ jobs:
           target: google_apis
           arch: x86_64
           emulator-options: "-no-window -no-audio"
+          timeout-minutes: 15
           script: |
             sleep 30  # Emulator'un başlatılması için biraz bekle
             adb install ./Beewa.apk
