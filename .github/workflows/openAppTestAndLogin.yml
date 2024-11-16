@@ -46,6 +46,7 @@ jobs:
           cmdline-tools-version: latest
           accept-android-sdk-licenses: true
 
+      # Emulator'u Başlat
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -53,23 +54,13 @@ jobs:
           target: google_apis
           arch: x86_64
           emulator-options: "-no-window -no-audio"
-
-      # APK Yükle
-      - name: Install APK
-        run: adb install ./Beewa.apk
-
-      # Appium Server Başlat
-      - name: Start Appium Server
-        run: |
-          npm install -g appium
-          appium --log-level error &
-        timeout-minutes: 3
-
-      # Robot Framework Testlerini Çalıştır
-      - name: Run Robot Framework Tests
-        run: |
-          sleep 30
-          robot -d Output tests/
+          script: |
+            sleep 30  # Emulator'un başlatılması için biraz bekle
+            adb install ./Beewa.apk
+            npm install -g appium
+            appium --log-level error & # Appium server'ı arka planda başlat
+            sleep 30  # Appium server'ın başlatılması için bekleyin
+            robot -d Output tests/ # Robot framework testlerini çalıştır 
 
       # Test Sonuçlarını Yükle
       - name: Archive Test Results
