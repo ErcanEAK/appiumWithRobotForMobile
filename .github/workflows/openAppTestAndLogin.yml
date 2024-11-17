@@ -50,19 +50,17 @@ jobs:
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30
-          target: google_apis
-          arch: x86_64
-          emulator-options: "-no-window -no-audio"
-          emulator-boot-timeout: 900
-          timeout-minutes: 15
-          script: |
-            sleep 30  # Emulator'un başlatılması için biraz bekle
-            adb install ./Beewa.apk
-            npm install -g appium
-            appium --log-level error & # Appium server'ı arka planda başlat
-            sleep 30  # Appium server'ın başlatılması için bekleyin
-            robot -d Output tests/ # Robot framework testlerini çalıştır 
+            api-level: 30
+            target: google_apis
+            arch: x86_64
+            emulator-options: "-no-window -no-audio"
+            script: |
+              adb wait-for-device
+              adb install ./Beewa.apk
+              npm install -g appium
+              appium --log-level error & # Appium server'ı arka planda başlat
+              sleep 30  # Appium server'ın başlatılması için bekleyin
+              robot -d Output tests/ # Robot framework testlerini çalıştır
 
       # Test Sonuçlarını Yükle
       - name: Archive Test Results
